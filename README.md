@@ -15,5 +15,14 @@ On verifie la fonctionnalitem maintenabilite, securite et performance du code fo
         - !isset($_POST["title"]) doit etre !isset($_POST["authour"]) en 2eme elseif
 
 - Security :
-    - L'application lis le contenu comme tel enregistre ce qui peut entraine a l'execution d'un script malicieux
+    - L'application lis le contenu comme tel enregistre ce qui peut entraine a l'execution d'un script malicieux\
+
+- Test de qualite:\
+    - script q_test.php genere par Gemini comme matiere premiere puis revise par l'auteur qui elabore un test dynamique pour verifier la connection au base de donnees, la cohesion des statements au validation.php, et le nesting et tags HTML.
+    ```bash
+        #!/bin/bash
+        # Executer le script de test php dans le container app
+        docker-compose exec app php q_test.php
+    ```
+    
 
