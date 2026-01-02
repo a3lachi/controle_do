@@ -27,7 +27,7 @@ On verifie la fonctionnalitem maintenabilite, securite et performance du code fo
     ```bash
         #!/bin/bash
         # Executer le script de test php dans le container app
-        docker-compose exec app php q_test.php
+        docker compose exec app php q_test.php
     ```
     
 
