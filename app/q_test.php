@@ -54,7 +54,7 @@ runTest("Database Connection", function() use ($files) {
     try {
         // Use the $options defined in db-config.php if available
         global $options;
-        $pdo = new PDO(DB_DSN, DB_USER, DB_PASS, isset($options) ? $options : []);
+        new PDO(DB_DSN, DB_USER, DB_PASS, isset($options) ? $options : []);
         return true;
     } catch (PDOException $e) {
         return "Connection failed: " . $e->getMessage();
@@ -90,6 +90,20 @@ runTest("index.php Security (XSS)", function() use ($files) {
     }
     return true;
 });
+
+// 5. Static Analysis: Security (SQL Injection)
+runTest("Global Security (SQL Injection)", function() use ($files) {
+    foreach ($files as $name => $path) {
+        if ($name === 'db_config') continue;
+        $content = file_get_contents($path);
+        // Check for variables interpolated directly into SQL strings (Basic Heuristic)
+        if (preg_match('/["\']\s*(SELECT|INSERT|UPDATE|DELETE)\s+.*\$[a-zA-Z_].*["\']/i', $content)) {
+            return "Potential SQL Injection in $name.php: Variable interpolation in SQL string";
+        }
+    }
+    return true;
+});
+
 
 echo "===========================\n";
 echo "Tests Completed: $passCount Passed, $failCount Failed.\n";
