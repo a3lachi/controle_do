@@ -35,7 +35,11 @@ jobs:
     - name: Run Quality Tests (q_test.php)
       run: docker compose exec -T app php q_test.php
 
-    # 5. Arrêter les conteneurs (Nettoyage)
+    # 5. Exécuter les tests unitaires (u_test.php)
+    - name: Run Unit Tests (u_test.php)
+      run: docker compose exec -T app php u_test.php
+
+    # 6. Arrêter les conteneurs (Nettoyage)
     - name: Stop Containers
       if: always() # S'exécute même si les tests échouent
       run: docker compose down
