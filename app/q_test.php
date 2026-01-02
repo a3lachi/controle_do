@@ -104,6 +104,34 @@ runTest("Global Security (SQL Injection)", function() use ($files) {
     return true;
 });
 
+// 6. Dynamic Analysis: Performance (DB Latency)
+runTest("Performance: Database Latency (< 100ms)", function() use ($files) {
+    if (!file_exists($files['db_config'])) return "Skipped: config missing";
+    require_once $files['db_config'];
+    global $options;
+    
+    $start = microtime(true);
+    try {
+        $pdo = new PDO(DB_DSN, DB_USER, DB_PASS, isset($options) ? $options : []);
+        $pdo->query("SELECT 1"); // Simple query to test round-trip
+    } catch (PDOException $e) {
+        return "Connection failed during perf test";
+    }
+    $duration = (microtime(true) - $start) * 1000; // Convert to ms
+    
+    if ($duration > 100) return "Too slow: " . round($duration, 2) . "ms (Limit: 100ms)";
+    return true;
+});
+
+// 7. Static Analysis: Performance (Anti-Patterns)
+runTest("Performance: Static Analysis (No SELECT *)", function() use ($files) {
+    $content = file_get_contents($files['index']);
+    // Using SELECT * is bad for performance (fetching unnecessary columns)
+    if (preg_match('/SELECT\s+\*\s+FROM/i', $content)) {
+        return "Found 'SELECT *' in index.php. Define specific columns for better performance.";
+    }
+    return true;
+});
 
 echo "===========================\n";
 echo "Tests Completed: $passCount Passed, $failCount Failed.\n";
