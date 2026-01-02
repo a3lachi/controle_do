@@ -6,7 +6,7 @@
 On verifie la fonctionnalitem maintenabilite, securite et performance du code fournie. 
 
 ### 1. Analyse statique 
-- Linting :\
+- Linting :
     - Invalid HTML Nesting: le tag h2 en app/index.php est ferme avant que le tag small est ferme.\
     - Le tag cite en app/index.php n'est pas ferme correctement  ( cite a la place de /cite)
     - !isset($_POST["title"]) en app/validation.php doit etre !isset($_POST["authour"]) en 2eme elseif
