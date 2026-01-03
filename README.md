@@ -47,7 +47,7 @@ On verifie la fonctionnalitem maintenabilite, securite et performance du code fo
     - Verification de l'integrite des donnees
     - Verification du structure du donnees
     - Test de l'ordre du tri
-    - Test de robustesse face au catacteres speciaux
+    - Test de robustesse face au catacteres speciaux\
 
     ```bash
     #!/bin/bash
