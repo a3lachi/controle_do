@@ -25,9 +25,9 @@ On verifie la fonctionnalitem maintenabilite, securite et performance du code fo
 
 - Test de qualite :
     ```bash
-        #!/bin/bash
-        # Executer le script de test php dans le container app
-        docker compose exec app php q_test.php
+    #!/bin/bash
+    # Executer le script de test php dans le container app
+    docker compose exec app php q_test.php
     ```
 
 
@@ -36,7 +36,7 @@ On verifie la fonctionnalitem maintenabilite, securite et performance du code fo
     - Creation du fichier .github/workflows/ci.yml
     - Enregistrement sur Docker Hub et generation de token prive
     - Ajout de variables environnement
-    
+
 
 ### 3. Tests unitaires :
 
@@ -48,5 +48,11 @@ On verifie la fonctionnalitem maintenabilite, securite et performance du code fo
     - Verification du structure du donnees
     - Test de l'ordre du tri
     - Test de robustesse face au catacteres speciaux
+
+    ```bash
+    #!/bin/bash
+    # Executer le script de test php dans le container app
+    docker compose exec app php u_test.php
+    ```
     
 
