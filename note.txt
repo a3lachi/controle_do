@@ -9,3 +9,5 @@ List swarm stacks
 Remove the stack
 - docker stack rm <stack_name>
  
+-Texting for fun :
+	-texting
